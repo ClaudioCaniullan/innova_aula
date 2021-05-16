@@ -16,6 +16,12 @@ def index(request):
 def perfil(request):
 	return render(request, 'perfil.html', {})
 
+def crear_material(request):
+	return render(request, 'crear_material.html', {})
+
+def crear_planificacion(request):
+	return render(request, 'crear_planificacion.html', {})
+
 
 
 def login_user(request):
@@ -43,7 +49,7 @@ def login_user(request):
 def register(request):
 	# si el usuario esta logeado, evitamos que vaya a registro desde el navegador
 	if request.user.is_authenticated:
-		return redirect('index')
+		return redirect('perfil')
 
 	#generamos un formulario con datos del cliente o vacio
 	form = RegisterForm(request.POST or None)
@@ -56,7 +62,7 @@ def register(request):
 			# al crear el usuario se logea y redirige
 			login(request, user)
 			messages.success(request, 'Usuario creado exitosamente')
-			return redirect('index')
+			return redirect('perfil')
 
 	return render(request, 'register.html', {'form':form}) 
 
